@@ -18,12 +18,12 @@ function Post({ post }) {
           </span>
         </h5>
         <p className="card-text">{post.body}</p>
-        {post.tags.map((element) => (
+        {/* {post.tags.map((element) => (
           <span key={element} className="badge text-bg-primary tags">{element}</span>
-        ))}
-        <div className="alert alert-success reactions" role="alert">
+        ))} */}
+        {/* <div className="alert alert-success reactions" role="alert">
  this post has been reacted by {post.reactions} people.
-</div>
+</div> */}
       </div>
     </div>
   );
