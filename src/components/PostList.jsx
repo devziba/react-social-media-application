@@ -3,9 +3,8 @@ import { PostList as postListData } from "../store/post-list-store";
 import Post from "./Post";
 import WelcomeMessage from "./WelcomeMessage";
 function PostList() {
-  let allPosts = useContext(postListData);
-  let { addInitialPosts } = useContext(postListData);
-  let posts = allPosts.postList;
+  let { postList , addInitialPosts } = useContext(postListData);
+  let posts = postList;
 
   if (posts.length === 0) {
     const handleGetPostClick = () => {
@@ -13,11 +12,11 @@ function PostList() {
         .then((res) => res.json())
         .then(data =>{
 
-          data.posts.map((value)=>{
+          data.posts.forEach((value)=>{
             addInitialPosts(value)}
           )
           }
-          );
+          ).catch((error) => console.error("Failed to fetch posts:", error));
     };
     return (
       <WelcomeMessage onGetPostsClick={handleGetPostClick}></WelcomeMessage>
