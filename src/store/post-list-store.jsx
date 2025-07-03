@@ -3,7 +3,7 @@ import { createContext, useReducer } from "react";
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
-  addInitialPosts: ()=>{},
+  addInitialPosts: () => {},
   deletePost: () => {},
 });
 
@@ -13,14 +13,13 @@ const postListReducer = (currPostList, action) => {
   if (action.type === "DELETE_CARD") {
     newValue = currPostList.filter((arr) => arr.id !== action.payload.id);
   }
-  if(action.type === "ADD_INITIAL_POSTS")
-  {
-      let myObject={
-        id: action.payload.id,
-        title: action.payload.postTitle,
-        body: action.payload.postBody,
-      }
-    newValue=[...currPostList,myObject];
+  if (action.type === "ADD_INITIAL_POSTS") {
+    let myObject = {
+      id: action.payload.id,
+      title: action.payload.postTitle,
+      body: action.payload.postBody,
+    };
+    newValue = [...currPostList, myObject];
   }
   if (action.type === "ADD_CARD") {
     let myObject = {
@@ -52,17 +51,15 @@ const PostListProvider = ({ children }) => {
     dispatchPostList(myAddObject);
   };
 
-    const addInitialPosts = (posts) => {
-      
+  const addInitialPosts = (posts) => {
     let myAddObject = {
       type: "ADD_INITIAL_POSTS",
       payload: {
-        id:posts.id,
-        postTitle:posts.title,
-        postBody:posts.body,
+        id: posts.id,
+        postTitle: posts.title,
+        postBody: posts.body,
       },
     };
-    console.log(posts.id)
     dispatchPostList(myAddObject);
   };
   const deletePost = (id) => {
@@ -78,7 +75,9 @@ const PostListProvider = ({ children }) => {
   let [postList, dispatchPostList] = useReducer(postListReducer, []);
 
   return (
-    <PostList.Provider value={{ postList, addPost,addInitialPosts, deletePost }}>
+    <PostList.Provider
+      value={{ postList, addPost, addInitialPosts, deletePost }}
+    >
       {children}
     </PostList.Provider>
   );
